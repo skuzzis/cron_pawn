@@ -23,7 +23,7 @@ namespace libcron
             std::chrono::seconds utc_offset(std::chrono::system_clock::time_point) const override
             {
 				using namespace std::chrono;
-                return 0s;
+                return std::chrono::seconds(0);
             }
     };
 
