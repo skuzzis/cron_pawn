@@ -128,7 +128,7 @@ namespace libcron
         for (auto it = name_schedule_map.begin(); is_valid && it != name_schedule_map.end(); ++it)
         {
             const auto& nameSchedule = *it;
-            const auto name = nameSchedule.name;
+            const std::string name = nameSchedule.name;
             const std::string schedule = nameSchedule.schedule;
 
             auto cron = CronData::create(schedule);
@@ -150,8 +150,8 @@ namespace libcron
             }
             else 
             {
-                res[1] = name;
-                res[2] = schedule;
+                std::get<1>(res) = name;
+                std::get<2>(res) = schedule;
             }
         }
 
