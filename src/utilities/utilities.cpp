@@ -5,6 +5,7 @@
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 
 #include <cstdarg>
+#include <cstring>
 #include <time.h>
 #include <fstream>
 #include <random>
@@ -39,7 +40,7 @@ float Utilities::GetFloat(AMX* amx, cell* params, int offset)
 	cell* memory_addr = nullptr;
 
 	amx_GetAddr(amx, params[offset], &memory_addr);
-	float value = round(amx_ctof(static_cast<cell>(*memory_addr)) * 100) / 100;
+	float value = round(amx_ctof(*memory_addr) * 100) / 100;
 	delete[] memory_addr;
 
 	return value;
