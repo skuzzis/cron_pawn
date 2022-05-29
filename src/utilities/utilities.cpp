@@ -5,14 +5,15 @@
 #define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 
 #include <cstdarg>
+#include <cstdlib>
 #include <cstring>
 #include <time.h>
 #include <fstream>
 #include <random>
-#include <experimental/filesystem>
 
 #include "utilities.hpp"
 #include <set>
+#include <filesystem>
 
 int log_level = LOG_NONE;
 
@@ -48,7 +49,7 @@ float Utilities::GetFloat(AMX* amx, cell* params, int offset)
 
 int Utilities::GenerateDirectories(const char* location)
 {
-	return (int)std::experimental::filesystem::create_directories(location);
+	return (int) std::filesystem::create_directories(location);
 }
 
 void Utilities::prepareLogging(int log_lvl) 
