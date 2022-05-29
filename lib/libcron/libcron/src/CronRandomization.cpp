@@ -105,7 +105,8 @@ namespace libcron
             final_cron_schedule += " " + day_of_week.second;
         }
 
-        return { res, final_cron_schedule };
+        std::tuple<bool, std::string> tup{ res, final_cron_schedule };
+        return tup;
     }
 
     std::pair<int, int> CronRandomization::day_limiter(const std::set<Months>& months)

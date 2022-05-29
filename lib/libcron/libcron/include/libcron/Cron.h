@@ -127,12 +127,22 @@ namespace libcron
 
         for (auto it = name_schedule_map.begin(); is_valid && it != name_schedule_map.end(); ++it)
         {
-            const auto& [name, schedule] = *it;
+            const auto& nameSchedule = *it;
+            const auto name = nameSchedule.name;
+            const std::string schedule = nameSchedule.schedule;
+
             auto cron = CronData::create(schedule);
             is_valid = cron.is_valid();
             if (is_valid)
             {
-                Task t{std::move(name), CronSchedule{cron}, work };
+                CronSchedule schedule;
+                schedule.data = cron;
+
+                Task t;
+                t.name = std::move(name);
+                t.schedule = schedule;
+                t.task = work;
+
                 if (t.calculate_next(clock.now()))
                 {
                     tasks_to_add.push_back(std::move(t));
@@ -140,8 +150,8 @@ namespace libcron
             }
             else 
             {
-                std::get<1>(res) = name;
-                std::get<2>(res) = schedule;
+                res[1] = name;
+                res[2] = schedule;
             }
         }
 
